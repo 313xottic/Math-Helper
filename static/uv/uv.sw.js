@@ -108,7 +108,9 @@ class UVServiceWorker extends EventEmitter {
 
             const response = await fetch(requestCtx.send);
 
-
+            if (response.status === 500) {
+                return Promise.reject('');
+            };
 
             const responseCtx = new ResponseContext(requestCtx, response, this);
             const resEvent = new HookEvent(responseCtx, null, null);
